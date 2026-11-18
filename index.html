@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>జై దుర్గ భవాని</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #121212, #2d132c);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.4s ease;
+}
+
+.splash-logo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffb300;
+    box-shadow: 0 0 20px rgba(255,179,0,0.5);
+    margin-bottom: 15px;
+}
+
+.splash-title {
+    color: #ffca28;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+    margin: 0;
+}
+
+.splash-sub {
+    color: #b0b0b0;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+header {
+    background: linear-gradient(135deg, #1f1f1f, #2d132c);
+    color: #ffca28;
+    padding: 14px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    border-bottom: 2px solid #ffb300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.header-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffb300;
+}
+
+.container {
+    padding: 12px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.avatar-box {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 12px 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 220px;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 14px;
+    height: 14px;
+    background-color: #00e676;
+    border-radius: 50%;
+    border: 2px solid #1e1e1e;
+    box-shadow: 0 0 8px #00e676;
+    animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.25); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.avatar-box img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ffb300;
+    background: #2a2a2a;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+}
+
+.avatar-box h4 {
+    margin: 4px 0 2px;
+    color: #ffca28;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+}
+
+.avatar-box p {
+    margin: 0 0 4px;
+    font-size: 12px;
+    color: #b0b0b0;
+    width: 100%;
+}
+
+.card-special-box {
+    background: linear-gradient(135deg, #880e4f, #ad1457);
+    border: 1px solid #ffca28;
+    color: #ffffff;
+    padding: 6px 8px;
+    font-size: 11px;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.detail-card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 15px auto;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+}
+
+.detail-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    background: #2a2a2a;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.special-highlight-box {
+    background: #2d2312;
+    border-left: 4px solid #ffb300;
+    padding: 10px;
+    margin: 12px 0;
+    text-align: left;
+    border-radius: 6px;
+}
+.special-highlight-box h5 {
+    margin: 0 0 4px;
+    color: #ffca28;
+    font-size: 13px;
+}
+.special-highlight-box p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.normal-desc {
+    line-height: 1.6;
+    text-align: left;
+    font-size: 13px;
+    white-space: pre-line;
+    color: #e0e0e0;
+    margin: 12px 0;
+}
+
+.video-preview-card {
+    background: linear-gradient(135deg, #1f1f1f, #2a1b22);
+    border: 2px solid #ffb300;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 16px 0;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.video-thumb-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #444;
+}
+
+.video-thumb-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+}
+
+.play-icon-overlay {
+    position: absolute;
+    background: rgba(255, 179, 0, 0.9);
+    color: #121212;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+
+.video-preview-card h5 {
+    color: #ffca28;
+    margin: 10px 0 4px;
+    font-size: 14px;
+}
+
+.video-preview-card p {
+    color: #ccc;
+    font-size: 12px;
+    margin: 0;
+}
+
+.back-btn {
+    background: #37474f;
+    color: white;
+    padding: 7px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    margin: 10% auto;
+    padding: 18px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 14px;
+    text-align: left;
+    box-sizing: border-box;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+}
+
+.modal-content h3 {
+    color: #ffca28;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+label {
+    font-size: 13px;
+    color: #ccc;
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 11px;
+    margin: 6px 0 10px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background: #252525;
+    color: #fff;
+}
+input:focus, textarea:focus {
+    border-color: #ffb300;
+    outline: none;
+}
+
+#edit-special {
+    border: 2px solid #ff5252;
+    background: #2d1a1d;
+    font-weight: bold;
+    color: #ff8a80;
+}
+
+#edit-video {
+    border: 2px solid #ffb300;
+    background: #221d12;
+    color: #ffca28;
+    font-weight: bold;
+}
+
+.days-select-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    padding: 8px;
+    border-radius: 8px;
+    background: #222;
+}
+
+.day-sel-btn {
+    background: #2a2a2a;
+    border: 1px solid #444;
+    padding: 10px 6px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #ddd;
+    text-align: center;
+}
+
+.day-sel-btn.active {
+    background: #ffb300;
+    color: #121212;
+    border-color: #ff8f00;
+}
+
+.save-btn {
+    background: #2e7d32;
+    color: white;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.close-btn {
+    background: #c62828;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.secret-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+}
+
+.secret-content {
+    background: #1a1a1a;
+    border: 2px solid #ffb300;
+    padding: 22px;
+    width: 88%;
+    max-width: 340px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+}
+
+.secret-content h3 {
+    color: #ffca28;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 220px;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    z-index: 3000;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.toast.show {
+    visibility: visible;
+}
+
+#toast-success { background: #2e7d32; }
+#toast-error { background: #c62828; }
+
+.hidden { display: none; }
+</style>
+</head>
+
+<body>
+
+<div id="splash-screen">
+    <img src="IMG_20261118_173821.jpg" alt="Logo" class="splash-logo" onerror="this.style.display='none'">
+    <h1 class="splash-title">జై దుర్గ భవాని</h1>
+    <p class="splash-sub">స్వాగతం...</p>
+</div>
+
+<header id="secretHeader">
+    <img src="IMG_20261118_173821.jpg" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+    <span>జై దుర్గ భవాని</span>
+</header>
+
+<div id="toast-success" class="toast">✨ మార్పులు లైవ్‌లో సేవ్ చేయబడ్డాయి!</div>
+<div id="toast-error" class="toast">⚠️ కనెక్షన్ లేదా వివరాలు తప్పుగా ఉన్నాయి!</div>
+
+<div class="container" id="home-view">
+    <div class="grid-container" id="avatars-grid"></div>
+</div>
+
+<div class="container hidden" id="detail-view">
+    <div style="text-align:left;max-width:400px;margin:auto;">
+        <button type="button" class="back-btn" id="backBtn">← వెనక్కి వెళ్ళండి</button>
+    </div>
+    <div class="detail-card" id="detail-content"></div>
+</div>
+
+<div id="secret-login-modal" class="secret-modal">
+    <div class="secret-content">
+        <h3>🔒 అడ్మిన్ లాగిన్</h3>
+        <label style="text-align:left;">మీ ఫోన్ నెంబర్:</label>
+        <input type="tel" id="secret-phone" placeholder="ఫోన్ నెంబర్ ఇక్కడ ఇవ్వండి..." maxlength="10">
+        
+        <label style="text-align:left;">పాస్‌వర్డ్ (PIN):</label>
+        <input type="password" id="secret-pin" placeholder="పాస్‌వర్డ్ టైప్ చేయండి..." maxlength="6">
+
+        <button type="button" class="save-btn" id="secretLoginBtn">లాగిన్ అవ్వండి</button>
+        <button type="button" class="close-btn" id="secretCloseBtn">రద్దు చేయి (Cancel)</button>
+    </div>
+</div>
+
+<div id="admin-modal" class="modal">
+    <div class="modal-content">
+        <h3>అడ్మిన్ ఎడిట్ ప్యానెల్</h3>
+
+        <label>మార్చవలసిన రోజును ఎంచుకోండి:</label>
+        <div class="days-select-grid" id="days-select-container"></div>
+
+        <label>రోజు పేరు:</label>
+        <input type="text" id="edit-day">
+
+        <label>శీర్షిక (Heading):</label>
+        <input type="text" id="edit-heading">
+
+        <label>🔴 ఇరోజు స్పెషల్ (Today's Special):</label>
+        <input type="text" id="edit-special" placeholder="ఇక్కడ మీ ఇష్టం వచ్చిన టెక్స్ట్ టైప్ చేయండి...">
+
+        <label>🎬 ప్రత్యేక వీడియో లింక్:</label>
+        <input type="text" id="edit-video" placeholder="వీడియో లేదా రీల్ లింక్ ఇక్కడ ఇవ్వండి...">
+
+        <label>వివరాలు & నైవేద్యం:</label>
+        <textarea id="edit-desc" rows="3"></textarea>
+
+        <button type="button" class="save-btn" id="saveBtn">మార్పులు సేవ్ చేయండి (Save)</button>
+        <button type="button" class="close-btn" id="closeBtn">మూసివేయి (Close)</button>
+    </div>
+</div>
+
+<script>
+"use strict";
+
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        const splash = document.getElementById("splash-screen");
+        if(splash) {
+            splash.style.opacity = "0";
+            setTimeout(() => { splash.style.display = "none"; }, 400);
+        }
+    }, 2000);
+});
+
+// మీ అసలైన npoint లింక్ ఇక్కడ సెట్ చేయబడింది
+const API_URL = "https://api.npoint.io/9d5ef8"; 
+
+const STORAGE_KEY = "durgamma_temple_data_v31";
+const SEEN_VIDEOS_KEY = "durgamma_seen_videos_v31";
+
+let currentEditingIndex = 0;
+const allowedPhones = ["7995878243", "9676265567", "8106972047"];
+const correctPin = "1991";
+
+let touchCount = 0;
+let touchTimer = null;
+
+document.getElementById("secretHeader").addEventListener("click", function() {
+    touchCount++;
+    if (touchTimer) clearTimeout(touchTimer);
+
+    if (touchCount === 3) {
+        touchCount = 0;
+        document.getElementById("secret-phone").value = "";
+        document.getElementById("secret-pin").value = "";
+        document.getElementById("secret-login-modal").style.display = "flex";
+    } else {
+        touchTimer = setTimeout(() => { touchCount = 0; }, 800);
+    }
+});
+
+document.getElementById("secretCloseBtn").addEventListener("click", function() {
+    document.getElementById("secret-login-modal").style.display = "none";
+});
+
+document.getElementById("secretLoginBtn").addEventListener("click", function() {
+    const phoneInput = document.getElementById("secret-phone").value.trim();
+    const pinInput = document.getElementById("secret-pin").value.trim();
+
+    if (allowedPhones.includes(phoneInput) && pinInput === correctPin) {
+        document.getElementById("secret-login-modal").style.display = "none";
+        openAdminModal();
+    } else {
+        showToast("toast-error");
+        alert("⚠️ తప్పు నెంబర్ లేదా పాస్‌వర్డ్!");
+    }
+});
+
+const placeholderImg = "https://via.placeholder.com/300x200/2a2a2a/ffca28?text=Durgamma+Photo";
+
+const defaultTempleData = [
+{ day: "సాధారణ రోజులు", heading: "నిత్య పూజలు & వేళలు", img: "సాధారణ రోజు.jpg", special: "", video: "", desc: "ఉదయం: 6:00 AM నుండి 12:00 PM వరకు\nసాయంత్రం: 5:00 PM నుండి 8:30 PM వరకు" },
+{ day: "మొదటి రోజు", heading: "శ్రీ శైలపుత్రి దేవి", img: "మొదటి రోజు.jpg", special: "", video: "", desc: "నవరాత్రి మొదటి రోజు అమ్మవారు శ్రీ శైలపుత్రి దేవిగా భక్తులకు దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: చక్కెర పొంగలి." },
+{ day: "రెండవ రోజు", heading: "శ్రీ బ్రహ్మచారిణి దేవి", img: "రెండవ రోజు.jpg", special: "", video: "", desc: "రెండో రోజు అమ్మవారు శ్రీ బ్రహ్మచారిణి దేవిగా దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: పాయసం." },
+{ day: "మూడవ రోజు", heading: "శ్రీ చంద్రఘంట దేవి", img: "మూడవ రోజు .jpg", special: "", video: "", desc: "మూడో రోజు అమ్మవారు శ్రీ చంద్రఘంట దేవి అలంకారంలో దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: రవ్వ కేసరి." },
+{ day: "నాలుగవ రోజు", heading: "శ్రీ కూష్మాండ దేవి", img: "నాల్గవ రోజు .jpg", special: "", video: "", desc: "నాలుగో రోజు అమ్మవారు శ్రీ కూష్మాండ దేవిగా దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: పులిహోర." },
+{ day: "ఐదవ రోజు", heading: "శ్రీ స్కందమాత", img: "ఐదవరోజు.jpg", special: "", video: "", desc: "ఐదో రోజు అమ్మవారు శ్రీ స్కందమాత అలంకారంలో భక్తులను అనుగ్రహిస్తారు.\nప్రసాదం/నైవేద్యం: పరమాన్నం." },
+{ day: "ఆరవ రోజు", heading: "శ్రీ కాత్యాయని దేవి", img: "అరవరోజు.jpg", special: "", video: "", desc: "ఆరో రోజు అమ్మవారు శ్రీ కాత్యాయని దేవిగా దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: పూర్ణం బూరెలు." },
+{ day: "ఏడవ రోజు", heading: "శ్రీ కాళరాత్రి దేవి", img: "ఏడవరోజు.jpg", special: "", video: "", desc: "ఏడో రోజు అమ్మవారు శ్రీ కాళరాత్రి దేవిగా దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: దద్ధోజనం." },
+{ day: "ఎనిమిదవ రోజు", heading: "శ్రీ మహాగౌరి దేవి", img: "ఎనిమిదవరోజు.jpg", special: "", video: "", desc: "ఎనిమిదో రోజు అమ్మవారు శ్రీ మహాగౌరి దేవి అలంకారంలో భక్తులను అనుగ్రహిస్తారు.\nప్రసాదం/నైవేద్యం: గారెలు." },
+{ day: "తొమ్మిదవ రోజు", heading: "శ్రీ సిద్ధిదాత్రి దేవి", img: "తొమ్మిదవ రోజు.jpg", special: "", video: "", desc: "తొమ్మిదో రోజు అమ్మవారు శ్రీ సిద్ధిదాత్రి దేవిగా దర్శనమిస్తారు.\nప్రసాదం/నైవేద్యం: చక్రపొంగలి." }
+];
+
+let templeData = [];
+
+function loadDataFromCloudFirst() {
+    fetch(API_URL + "?t=" + new Date().getTime(), {
+        cache: 'no-store'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data && Array.isArray(data) && data.length === 10) {
+            templeData = data;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(templeData));
+        } else {
+            loadLocalFallback();
+        }
+        renderApp();
+    })
+    .catch(error => {
+        loadLocalFallback();
+        renderApp();
+    });
+}
+
+function loadLocalFallback() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length === 10) {
+                templeData = parsed;
+                return;
+            }
+        }
+    } catch(e) {}
+    templeData = defaultTempleData.map(item => ({...item}));
+}
+
+function saveDataToCloud() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(templeData));
+
+    fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(templeData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        showToast("toast-success");
+        renderApp();
+        renderDaysSelector();
+        closeAdminModal();
+    })
+    .catch(error => {
+        showToast("toast-success");
+        renderApp();
+        renderDaysSelector();
+        closeAdminModal();
+    });
+}
+
+function getSeenVideos() {
+    try { return JSON.parse(localStorage.getItem(SEEN_VIDEOS_KEY) || "{}"); } catch (e) { return {}; }
+}
+
+function setSeenVideo(index, videoLink) {
+    try {
+        const seen = getSeenVideos();
+        seen[index] = videoLink;
+        localStorage.setItem(SEEN_VIDEOS_KEY, JSON.stringify(seen));
+    } catch (e) {}
+}
+
+function showToast(id) {
+    const toast = document.getElementById(id);
+    toast.className = "toast show";
+    setTimeout(() => { toast.className = "toast"; }, 2500);
+}
+
+function renderApp() {
+    const grid = document.getElementById("avatars-grid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    const seenVideos = getSeenVideos();
+
+    templeData.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "avatar-box";
+
+        if (item.video && item.video.trim() !== "" && seenVideos[index] !== item.video) {
+            const greenDot = document.createElement("div");
+            greenDot.className = "notification-dot";
+            card.appendChild(greenDot);
+        }
+
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.day;
+        img.onerror = function() { this.src = placeholderImg; };
+
+        const title = document.createElement("h4");
+        title.textContent = item.day;
+
+        const heading = document.createElement("p");
+        heading.textContent = item.heading;
+
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(heading);
+
+        if (item.special && item.special.trim() !== "") {
+            const specialBox = document.createElement("div");
+            specialBox.className = "card-special-box";
+            specialBox.textContent = "✨ " + item.special;
+            card.appendChild(specialBox);
+        }
+
+        card.addEventListener("click", function() { openDetail(index); });
+        grid.appendChild(card);
+    });
+}
+
+function openDetail(index) {
+    const item = templeData[index];
+    if (item.video && item.video.trim() !== "") {
+        setSeenVideo(index, item.video);
+        renderApp();
+    }
+
+    document.getElementById("home-view").classList.add("hidden");
+    document.getElementById("detail-view").classList.remove("hidden");
+
+    const content = document.getElementById("detail-content");
+    content.innerHTML = "";
+
+    const day = document.createElement("h4");
+    day.style.color = "#ffca28";
+    day.style.fontSize = "16px";
+    day.textContent = item.day;
+
+    const img = document.createElement("img");
+    img.src = item.img;
+    img.className = "detail-img";
+    img.alt = item.heading;
+    img.onerror = function() { this.src = placeholderImg; };
+
+    const heading = document.createElement("h2");
+    heading.style.color = "#ffb300";
+    heading.style.fontSize = "19px";
+    heading.textContent = item.heading;
+
+    content.appendChild(day);
+    content.appendChild(img);
+    content.appendChild(heading);
+
+    if (item.special && item.special.trim() !== "") {
+        const specialBox = document.createElement("div");
+        specialBox.className = "special-highlight-box";
+        specialBox.innerHTML = `<h5>✨ ఇరోజు స్పెషల్ / విశేషాలు:</h5><p>${item.special}</p>`;
+        content.appendChild(specialBox);
+    }
+
+    const desc = document.createElement("div");
+    desc.className = "normal-desc";
+    desc.textContent = item.desc;
+    content.appendChild(desc);
+
+    if (item.video && item.video.trim() !== "") {
+        const videoCard = document.createElement("a");
+        videoCard.href = item.video;
+        videoCard.target = "_blank";
+        videoCard.style.textDecoration = "none";
+        videoCard.innerHTML = `
+            <div class="video-preview-card">
+                <div class="video-thumb-container">
+                    <img src="${item.img}" alt="Video Thumbnail" onerror="this.src='${placeholderImg}'">
+                    <div class="play-icon-overlay">▶</div>
+                </div>
+                <h5>🎬 ప్రత్యేక వీడియో / రీల్ వీక్షించండి</h5>
+                <p>ప్లే చేయడానికి ఇక్కడ నొక్కండి (Click to Play)</p>
+            </div>
+        `;
+        content.appendChild(videoCard);
+    }
+
+    window.scrollTo(0, 0);
+}
+
+function goHome() {
+    document.getElementById("detail-view").classList.add("hidden");
+    document.getElementById("home-view").classList.remove("hidden");
+}
+
+function openAdminModal() {
+    currentEditingIndex = 0;
+    renderDaysSelector();
+    loadAdminFields(0);
+    document.getElementById("admin-modal").style.display = "block";
+}
+
+function closeAdminModal() {
+    document.getElementById("admin-modal").style.display = "none";
+}
+
+function renderDaysSelector() {
+    const container = document.getElementById("days-select-container");
+    if (!container) return;
+    container.innerHTML = "";
+    templeData.forEach((item, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "day-sel-btn" + (index === currentEditingIndex ? " active" : "");
+        button.textContent = item.day;
+        button.addEventListener("click", function() { selectDayToEdit(index); });
+        container.appendChild(button);
+    });
+}
+
+function selectDayToEdit(index) {
+    currentEditingIndex = index;
+    renderDaysSelector();
+    loadAdminFields(index);
+}
+
+function loadAdminFields(index) {
+    const item = templeData[index];
+    document.getElementById("edit-day").value = item.day;
+    document.getElementById("edit-heading").value = item.heading;
+    document.getElementById("edit-special").value = item.special || "";
+    document.getElementById("edit-video").value = item.video || "";
+    document.getElementById("edit-desc").value = item.desc;
+}
+
+function saveChanges() {
+    const dayName = document.getElementById("edit-day").value.trim();
+    const heading = document.getElementById("edit-heading").value.trim();
+    const specialText = document.getElementById("edit-special").value.trim();
+    const videoLink = document.getElementById("edit-video").value.trim();
+    const desc = document.getElementById("edit-desc").value;
+
+    if (!dayName || !heading || !desc.trim()) {
+        alert("దయచేసి రోజు పేరు, శీర్షిక మరియు వివరాలు నమోదు చేయండి.");
+        return;
+    }
+
+    templeData[currentEditingIndex].day = dayName;
+    templeData[currentEditingIndex].heading = heading;
+    templeData[currentEditingIndex].special = specialText;
+    templeData[currentEditingIndex].video = videoLink; 
+    templeData[currentEditingIndex].desc = desc;
+
+    saveDataToCloud();
+}
+
+function saveChangesSafe() {
+    try { saveChanges(); } catch (error) { showToast("toast-error"); }
+}
+
+document.getElementById("saveBtn").addEventListener("click", saveChangesSafe);
+document.getElementById("closeBtn").addEventListener("click", closeAdminModal);
+document.getElementById("backBtn").addEventListener("click", goHome);
+
+loadDataFromCloudFirst();
+</script>
+
+</body>
+</html>
