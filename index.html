@@ -553,7 +553,7 @@ window.addEventListener("load", function() {
     }, 2000);
 });
 
-// గిట్‌హబ్ నుండి లైవ్ సింక్ అయ్యే పర్మినెంట్ Raw లింక్
+// గిట్‌హబ్ Raw లింక్ లైవ్ సింక్ కోసం
 const API_URL = "https://raw.githubusercontent.com/srinureddy4231-code/temple-app-/refs/heads/main/index.html"; 
 
 const STORAGE_KEY = "durgamma_temple_data_v31";
@@ -872,7 +872,7 @@ function saveChangesSafe() {
 
 document.getElementById("saveBtn").addEventListener("click", saveChangesSafe);
 document.getElementById("closeBtn").addEventListener("click", closeAdminModal);
-document.getElementById("backBtn").addEventListener("click", goHome);
+document.getElementById("backBtn").getElementById ? document.getElementById("backBtn").addEventListener("click", goHome) : null;
 
 loadDataFromCloudFirst();
 </script>
