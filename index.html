@@ -553,8 +553,9 @@ window.addEventListener("load", function() {
     }, 2000);
 });
 
-// గిట్‌హబ్ Raw లింక్ లైవ్ సింక్ కోసం
-const API_URL = "https://raw.githubusercontent.com/srinureddy4231-code/temple-app-/refs/heads/main/index.html"; 
+// JSONBin.io క్లౌడ్ సింక్ కాన్ఫిగరేషన్
+const API_URL = "https://api.jsonbin.io/v3/b/6afdbb36ac6210605a91ede7";
+const JSONBIN_MASTER_KEY = "$2a$10$Nk3jJrUhYkt2tWYmAYPM5OBdzpDwDCeKXRxVJRFDDrlsdVt41vhjy";
 
 const STORAGE_KEY = "durgamma_temple_data_v31";
 const SEEN_VIDEOS_KEY = "durgamma_seen_videos_v31";
@@ -615,13 +616,21 @@ const defaultTempleData = [
 let templeData = [];
 
 function loadDataFromCloudFirst() {
-    fetch(API_URL + "?t=" + new Date().getTime(), {
-        cache: 'no-store'
+    fetch(API_URL + "/latest?t=" + new Date().getTime(), {
+        method: "GET",
+        cache: "no-store",
+        headers: {
+            "X-Master-Key": JSONBIN_MASTER_KEY
+        }
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data && Array.isArray(data) && data.length === 10) {
-            templeData = data;
+    .then(response => {
+        if (!response.ok) throw new Error("Network response not ok");
+        return response.json();
+    })
+    .then(json => {
+        const record = json && json.record ? json.record : json;
+        if (record && Array.isArray(record) && record.length === 10) {
+            templeData = record;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(templeData));
         } else {
             loadLocalFallback();
@@ -652,13 +661,17 @@ function saveDataToCloud() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(templeData));
 
     fetch(API_URL, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
+            "X-Master-Key": JSONBIN_MASTER_KEY
         },
         body: JSON.stringify(templeData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) throw new Error("Save failed");
+        return response.json();
+    })
     .then(data => {
         showToast("toast-success");
         renderApp();
@@ -666,10 +679,7 @@ function saveDataToCloud() {
         closeAdminModal();
     })
     .catch(error => {
-        showToast("toast-success");
-        renderApp();
-        renderDaysSelector();
-        closeAdminModal();
+        showToast("toast-error");
     });
 }
 
@@ -872,7 +882,7 @@ function saveChangesSafe() {
 
 document.getElementById("saveBtn").addEventListener("click", saveChangesSafe);
 document.getElementById("closeBtn").addEventListener("click", closeAdminModal);
-document.getElementById("backBtn").getElementById ? document.getElementById("backBtn").addEventListener("click", goHome) : null;
+document.getElementById("backBtn").addEventListener("click", goHome);
 
 loadDataFromCloudFirst();
 </script>
